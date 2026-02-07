@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea del Tiempo: Teorías de la Arquitectura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f4eadd; /* Beige claro */
+            --text-color: #5e4432; /* Marrón intenso */
+            --accent-color: #8b6c5c; /* Tono marrón más claro */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: url('image_0.png'); /* Fondo con patrón de manchas de la imagen */
+            background-repeat: repeat;
+            background-size: auto;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color);
+        }
+
+        /* PORTADA */
+        #cover {
+            text-align: center;
+            padding: 6rem 2rem;
+            background-color: var(--bg-color);
+            border-bottom: 5px solid var(--accent-color);
+            position: relative;
+        }
+
+        #cover h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .author-list {
+            list-style: none;
+            padding: 0;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+        }
+
+        .author-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .cover-image {
+            position: absolute;
+            width: 150px;
+        }
+
+        .cover-image.coin { top: 20px; left: 20px; }
+        .cover-image.helmet { top: 20px; right: 20px; }
+
+        /* TIMELINE CONTAINER */
+        .timeline-section {
+            padding: 4rem 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* La línea vertical central */
+        .timeline-section::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        /* Contenedor de cada evento */
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .left { left: 0; }
+        .right { left: 50%; }
+
+        /* Los puntos en la línea */
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--accent-color);
+            top: 22px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .right::after { left: -10px; }
+
+        /* Tarjetas de contenido */
+        .content {
+            padding: 20px 30px;
+            background-color: #fcf8f3; /* Beige muy claro para tarjetas */
+            position: relative;
+            border-radius: 4px;
+            border-left: 6px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(94, 68, 50, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .content:hover {
+            transform: translateY(-5px);
+        }
+
+        .date {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .content h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .content ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .content li {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        /* SEPARADOR DE AUTORES */
+        .author-divider {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin: 4rem 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .author-badge {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(94, 68, 50, 0.3);
+        }
+
+        /* SECCIÓN DE ANÁLISIS */
+        .analysis-section {
+            background-color: var(--bg-color);
+            padding: 4rem 1rem;
+            border-top: 2px solid var(--accent-color);
+        }
+
+        .analysis-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .analysis-card {
+            background: #fcf8f3;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(94, 68, 50, 0.2);
+        }
+
+        .analysis-card h3 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        /* BIBLIOGRAFÍA */
+        .biblio-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .biblio-item {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            text-indent: -2rem;
+            color: var(--text-color);
+        }
+
+        /* Elementos decorativos de fondo */
+        .decorative-statue, .decorative-globe {
+            position: fixed;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .decorative-statue { bottom: 20px; left: 20px; width: 200px; }
+        .decorative-globe { bottom: 20px; right: 20px; width: 150px; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-size: 1rem;
+        }
+
+        /* RESPONSIVE */
+        @media screen and (max-width: 768px) {
+            #cover h1 { font-size: 2.5rem; }
+            .author-list { font-size: 1rem; }
+            .timeline-section::after { left: 31px; }
+            .container { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .container::after { left: 23px; }
+            .left::after, .right::after { left: 23px; }
+            .right { left: 0%; }
+            .content { border-left: 6px solid var(--accent-color); }
+            .cover-image { width: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="image_0.png" alt="Moneda romana" class="cover-image coin">
+    <img src="image_0.png" alt="Casco romano" class="cover-image helmet">
+    <img src="image_0.png" alt="Estatua romana" class="decorative-statue">
+    <img src="image_0.png" alt="Globo terráqueo" class="decorative-globe">
+
+    <section id="cover">
+        <h1>LINEA DEL TIEMPO</h1>
+        <ul class="author-list">
+            <li>Cruz Hernández Marian Cristel 2137688</li>
+            <li>Cazares Ruiz Keira Samantha 2111035</li>
+            <li>Vázquez Hernández Danna Mitzary 2150199</li>
+            <li>Rubio Alemán Héctor Saúl 2161962</li>
+            <br>
+            <li>Materia: Teorías de la arquitectura</li>
+            <li>Grupo: 006</li>
+            <li>Docente: Rivera Guzman Luz Isela</li>
+        </ul>
+    </section>
+
+    <div class="timeline-section">
+        
+        <div class="author-divider">
+            <span class="author-badge">Marco Vitruvio Polión</span>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <span class="date">c. 80–70 a.C.</span>
+                <h3>Nacimiento</h3>
+                <p>Nace en el contexto de la Roma republicana, época de expansión técnica que influiría en su formación.</p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <span class="date">58–51 a.C.</span>
+                <h3>Ingeniero de Julio César</h3>
+                <p>Trabaja en máquinas de guerra, fortificaciones y obras hidráulicas, adquiriendo el conocimiento técnico base de su teoría.</p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <span class="date">30–20 a.C.</span>
+                <h3>Los Diez Libros de Arquitectura</h3>
+                <p>Bajo el emperador Augusto escribe <em>De Architectura</em>.</p>
+                <ul>
+                    <li>Primer tratado completo de la historia.</li>
+                    <li>Integra: Ingeniería, urbanismo, materiales y estética.</li>
+                    <li>Adapta saberes griegos (Hermógenes) al mundo romano.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <span class="date">Siglos III – XV d.C.</span>
+                <h3>Legado y Redescubrimiento</h3>
+                <ul>
+                    <li><strong>S. III-IV:</strong> Citado como autoridad antigua.</li>
+                    <li><strong>S. IX:</strong> Copia manuscrita en Suiza salva la obra.</li>
+                    <li><strong>S. XV:</strong> Redescubrimiento en Florencia. Influye en Brunelleschi y Alberti.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="author-divider">
+            <span class="author-badge">Leon Battista Alberti</span>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <span class="date">1404 - 1432</span>
+                <h3>Formación Humanista</h3>
+                <p>Nace en Génova (1404). Se gradúa en Derecho (1428) y se establece en Florencia (1432), entrando en contacto con el Renacimiento.</p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <span class="date">1435–1436</span>
+                <h3>Teoría de la Perspectiva</h3>
+                <p>Publica <em>De pictura</em>. Establece la perspectiva lineal y el concepto de "ventana abierta", vinculando geometría y visión.</p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <span class="date">1450–1452</span>
+                <h3>De Re Aedificatoria</h3>
+                <p>Primer tratado del Renacimiento moderno. Define la arquitectura como ciencia basada en proporción y armonía.</p>
+                <ul>
+                    <li><strong>Concinnitas:</strong> Armonía matemática perfecta.</li>
+                    <li><strong>Belleza:</strong> Objetiva y racional, no subjetiva.</li>
+                    <li><strong>Principios:</strong> Reinterpreta Firmitas, Utilitas y Venustas subordinados a la razón.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <span class="date">1446–1470</span>
+                <h3>Obras Maestras</h3>
+                <ul>
+                    <li><strong>Palacio Rucellai (1446):</strong> Uso racional de órdenes superpuestos.</li>
+                    <li><strong>Templo Malatestiano (1450):</strong> Reinterpretación del arco triunfal.</li>
+                    <li><strong>Santa María Novella (1456):</strong> Geometría pura (cuadrado y círculo).</li>
+                    <li><strong>San Andrés, Mantua (1470):</strong> Monumentalidad romana y nave única.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="author-divider">
+            <span class="author-badge">Andrea Palladio</span>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <span class="date">1508 - 1538</span>
+                <h3>Inicios y Formación</h3>
+                <p>Nace en Padua. Bajo la tutela del noble Gian Giorgio Trissino estudia la arquitectura clásica y recibe el nombre de "Palladio" (por Palas Atenea).</p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <span class="date">1540s - 1549</span>
+                <h3>Villas y Basílica de Vicenza</h3>
+                <p>Aplica principios de templos a edificios agrícolas. En 1549 realiza su primera gran obra civil en Vicenza con la logia de dos niveles.</p>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <span class="date">1566–1570</span>
+                <h3>Villa Rotonda y Los Cuatro Libros</h3>
+                <p>Diseña la Villa Rotonda (simetría total). En 1570 publica <em>Los cuatro libros de la arquitectura</em>, uniendo teoría y práctica mediante dibujos.</p>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <span class="date">1579–1580</span>
+                <h3>Teatro Olímpico y Legado</h3>
+                <p>Inicia el Teatro Olímpico basado en Vitruvio. Fallece en 1580, consolidando el "Palladianismo" que influiría siglos en Europa y América.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="analysis-section">
+        <div class="analysis-container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Análisis Comparativo</h2>
+            
+            <div class="analysis-card">
+                <h3>1. Similitudes y Diferencias</h3>
+                <p><strong>Similitudes:</strong> Los tres comparten una visión racional donde la arquitectura es una disciplina intelectual basada en principios universales, proporción y geometría. Vitruvio formula la tradición, Alberti la intelectualiza desde el humanismo y Palladio la sistematiza para la práctica.</p>
+                <br>
+                <p><strong>Diferencias:</strong> Mientras Vitruvio sienta las bases técnicas de la antigüedad, Alberti eleva la arquitectura a ciencia teórica y política, y Palladio logra crear un método replicable y habitacional.</p>
+            </div>
+
+            <div class="analysis-card">
+                <h3>2. Vigencia en la Actualidad</h3>
+                <p><strong>Firmitas, Utilitas, Venustas:</strong> Siguen siendo la tríada esencial: estabilidad, función y estética.</p>
+                <p><strong>Proporción y Ciudad:</strong> La geometría sigue siendo herramienta de orden, y la visión de Alberti sobre el edificio como parte del entorno urbano define el diseño contemporáneo.</p>
+                <p><strong>Teoría + Práctica:</strong> Gracias a Palladio, buscamos una arquitectura enseñable y modular.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="biblio-section">
+        <h2 style="border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; margin-bottom: 20px;">Referencias Bibliográficas</h2>
+        
+        <div class="biblio-item">Alberti, L. B. (1988). <em>De re aedificatoria</em> (J. Rykwert, N. Leach & R. Tavernor, Trads.). MIT Press.</div>
+        <div class="biblio-item">Alberti, L. B. (1972). <em>On painting and on sculpture: The Latin texts of De pictura and De statua</em>. Phaidon Press.</div>
+        <div class="biblio-item">Benevolo, L. (1994). <em>Historia de la arquitectura del Renacimiento</em>. Gustavo Gili.</div>
+        <div class="biblio-item">Cartwright, M., & Cartwright, M. (2023). <em>Vitruvio</em>. Enciclopedia de la Historia del Mundo.</div>
+        <div class="biblio-item">Kruft, H.-W. (1994). <em>Historia de la teoría de la arquitectura (Vol. 1)</em>. Alianza Editorial.</div>
+        <div class="biblio-item">Wittkower, R. (1998). <em>La arquitectura en la edad del humanismo</em>. Alianza Editorial.</div>
+        <div class="biblio-item">Redacción - BBC News Mundo. (2022). <em>Quién fue Vitruvio</em>. Yahoo News.</div>
+    </section>
+
+    <footer>
+        <p>FARQ UANL &copy; 2026</p>
+    </footer>
+
+</body>
+</html>
