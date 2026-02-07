@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Línea del Tiempo: Teorías de la Arquitectura</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-color: #f4eadd; /* Beige claro */
-            --text-color: #5e4432; /* Marrón intenso */
-            --accent-color: #8b6c5c; /* Tono marrón más claro */
+            --text-color: #2c1e16; /* Marrón muy oscuro para mejor lectura */
+            --accent-color: #8b6c5c; /* Tono marrón medio */
+            --card-bg: #fffbf7; /* Fondo de tarjeta casi blanco */
         }
 
         * {
@@ -23,28 +24,30 @@
             font-family: 'Merriweather', serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
-            background-image: url('image_0.png'); /* Fondo con patrón de manchas de la imagen */
+            line-height: 1.7;
+            /* Asegúrate de que image_0.png esté en tu repositorio */
+            background-image: url('image_0.png'); 
             background-repeat: repeat;
             background-size: auto;
         }
 
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
-            color: var(--text-color);
+            color: #4a3328; /* Título más oscuro */
         }
 
         /* PORTADA */
         #cover {
             text-align: center;
             padding: 6rem 2rem;
-            background-color: var(--bg-color);
+            background-color: rgba(244, 234, 221, 0.95); /* Fondo semi-transparente */
             border-bottom: 5px solid var(--accent-color);
             position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         #cover h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 2rem;
             font-weight: bold;
             text-transform: uppercase;
@@ -54,18 +57,19 @@
         .author-list {
             list-style: none;
             padding: 0;
-            font-size: 1.2rem;
-            color: var(--text-color);
+            font-size: 1.15rem;
             margin-bottom: 2rem;
+            font-weight: 600;
         }
 
         .author-list li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .cover-image {
             position: absolute;
             width: 150px;
+            opacity: 0.8;
         }
 
         .cover-image.coin { top: 20px; left: 20px; }
@@ -74,7 +78,7 @@
         /* TIMELINE CONTAINER */
         .timeline-section {
             padding: 4rem 1rem;
-            max-width: 1000px;
+            max-width: 1100px; /* Un poco más ancho para la info extra */
             margin: 0 auto;
             position: relative;
         }
@@ -93,7 +97,7 @@
 
         /* Contenedor de cada evento */
         .container {
-            padding: 10px 40px;
+            padding: 20px 50px;
             position: relative;
             background-color: inherit;
             width: 50%;
@@ -106,166 +110,182 @@
         .container::after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background-color: var(--bg-color);
-            border: 4px solid var(--accent-color);
-            top: 22px;
+            width: 22px;
+            height: 22px;
+            right: -11px;
+            background-color: var(--card-bg);
+            border: 5px solid var(--accent-color);
+            top: 30px;
             border-radius: 50%;
             z-index: 1;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
 
-        .right::after { left: -10px; }
+        .right::after { left: -11px; }
 
         /* Tarjetas de contenido */
         .content {
-            padding: 20px 30px;
-            background-color: #fcf8f3; /* Beige muy claro para tarjetas */
+            padding: 25px 35px;
+            background-color: var(--card-bg);
             position: relative;
-            border-radius: 4px;
+            border-radius: 6px;
             border-left: 6px solid var(--accent-color);
-            box-shadow: 0 4px 15px rgba(94, 68, 50, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .content:hover {
-            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(94, 68, 50, 0.15);
         }
 
         .date {
             color: var(--accent-color);
-            font-weight: bold;
-            font-size: 1rem;
+            font-weight: 900;
+            font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             display: block;
+            border-bottom: 1px solid rgba(139, 108, 92, 0.3);
+            padding-bottom: 5px;
         }
 
         .content h3 {
-            margin-bottom: 10px;
-            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
         }
 
         .content ul {
-            padding-left: 20px;
-            margin-top: 10px;
+            padding-left: 25px;
+            margin-top: 15px;
         }
 
         .content li {
-            margin-bottom: 5px;
+            margin-bottom: 12px;
             font-size: 1rem;
+        }
+
+        strong {
+            color: #4a3328;
+            font-weight: 700;
         }
 
         /* SEPARADOR DE AUTORES */
         .author-divider {
             grid-column: 1 / -1;
             text-align: center;
-            margin: 4rem 0;
+            margin: 5rem 0 3rem 0;
             z-index: 2;
             position: relative;
         }
 
         .author-badge {
             background-color: var(--accent-color);
-            color: var(--bg-color);
-            padding: 12px 40px;
+            color: var(--card-bg);
+            padding: 15px 50px;
             border-radius: 50px;
             font-weight: bold;
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             display: inline-block;
-            box-shadow: 0 4px 10px rgba(94, 68, 50, 0.3);
+            box-shadow: 0 6px 15px rgba(94, 68, 50, 0.4);
+            border: 3px solid #fff;
         }
 
         /* SECCIÓN DE ANÁLISIS */
         .analysis-section {
-            background-color: var(--bg-color);
-            padding: 4rem 1rem;
-            border-top: 2px solid var(--accent-color);
+            background-color: rgba(244, 234, 221, 0.95);
+            padding: 5rem 1rem;
+            border-top: 3px solid var(--accent-color);
+            margin-top: 4rem;
         }
 
         .analysis-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .analysis-card {
-            background: #fcf8f3;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
             border-radius: 8px;
-            border: 2px solid var(--accent-color);
-            box-shadow: 0 4px 15px rgba(94, 68, 50, 0.2);
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(94, 68, 50, 0.1);
         }
 
         .analysis-card h3 {
-            color: var(--text-color);
-            margin-bottom: 1rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(139, 108, 92, 0.3);
+            padding-bottom: 10px;
         }
 
         /* BIBLIOGRAFÍA */
         .biblio-section {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 4rem 1rem;
+            padding: 5rem 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin-bottom: 4rem;
         }
 
         .biblio-item {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             padding-left: 2rem;
             text-indent: -2rem;
-            color: var(--text-color);
         }
 
         /* Elementos decorativos de fondo */
         .decorative-statue, .decorative-globe {
             position: fixed;
-            opacity: 0.3;
+            opacity: 0.2;
             z-index: -1;
+            pointer-events: none;
         }
-        .decorative-statue { bottom: 20px; left: 20px; width: 200px; }
-        .decorative-globe { bottom: 20px; right: 20px; width: 150px; }
+        .decorative-statue { bottom: 20px; left: 20px; width: 250px; }
+        .decorative-globe { bottom: 20px; right: 20px; width: 180px; }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            background-color: var(--accent-color);
+            padding: 3rem;
+            background-color: #4a3328;
             color: var(--bg-color);
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
         }
 
         /* RESPONSIVE */
-        @media screen and (max-width: 768px) {
-            #cover h1 { font-size: 2.5rem; }
+        @media screen and (max-width: 900px) {
+            #cover h1 { font-size: 2.2rem; }
             .author-list { font-size: 1rem; }
+            .author-badge { font-size: 1.4rem; padding: 12px 30px; }
+            
             .timeline-section::after { left: 31px; }
             .container { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .container::after { left: 23px; }
-            .left::after, .right::after { left: 23px; }
+            .container::after { left: 20px; }
+            .left::after, .right::after { left: 20px; }
             .right { left: 0%; }
-            .content { border-left: 6px solid var(--accent-color); }
-            .cover-image { width: 100px; }
+            .content { border-left: 6px solid var(--accent-color); padding: 20px; }
+            
+            .cover-image { width: 80px; }
+            .decorative-statue, .decorative-globe { display: none; } /* Ocultar en móviles para no saturar */
         }
     </style>
 </head>
 <body>
 
-    <img src="image_0.png" alt="Moneda romana" class="cover-image coin">
-    <img src="image_0.png" alt="Casco romano" class="cover-image helmet">
-    <img src="image_0.png" alt="Estatua romana" class="decorative-statue">
-    <img src="image_0.png" alt="Globo terráqueo" class="decorative-globe">
+    <img src="image_0.png" alt="Decoración romana superior izquierda" class="cover-image coin">
+    <img src="image_0.png" alt="Decoración romana superior derecha" class="cover-image helmet">
+    <img src="image_0.png" alt="Estatua romana inferior izquierda" class="decorative-statue">
+    <img src="image_0.png" alt="Globo terráqueo inferior derecha" class="decorative-globe">
 
     <section id="cover">
-        <h1>LINEA DEL TIEMPO</h1>
+        <h1>LINEA DEL TIEMPO: TEORÍA ARQUITECTÓNICA</h1>
         <ul class="author-list">
             <li>Cruz Hernández Marian Cristel 2137688</li>
             <li>Cazares Ruiz Keira Samantha 2111035</li>
             <li>Vázquez Hernández Danna Mitzary 2150199</li>
             <li>Rubio Alemán Héctor Saúl 2161962</li>
             <br>
-            <li>Materia: Teorías de la arquitectura</li>
+            <li style="color: var(--accent-color);">Materia: Teorías de la arquitectura</li>
             <li>Grupo: 006</li>
             <li>Docente: Rivera Guzman Luz Isela</li>
         </ul>
@@ -279,124 +299,153 @@
 
         <div class="container left">
             <div class="content">
-                <span class="date">c. 80–70 a.C.</span>
-                <h3>Nacimiento</h3>
-                <p>Nace en el contexto de la Roma republicana, época de expansión técnica que influiría en su formación.</p>
+                <span class="date">c. 80–70 a.C. | Contexto Inicial</span>
+                <h3>Nacimiento y Contexto Republicano</h3>
+                <p>Nace en el contexto de la Roma republicana, una época caracterizada por la expansión militar y un intenso desarrollo técnico. Este entorno influiría decisivamente en su formación híbrida como ingeniero y teórico de la arquitectura.</p>
             </div>
         </div>
 
         <div class="container right">
             <div class="content">
-                <span class="date">58–51 a.C.</span>
-                <h3>Ingeniero de Julio César</h3>
-                <p>Trabaja en máquinas de guerra, fortificaciones y obras hidráulicas, adquiriendo el conocimiento técnico base de su teoría.</p>
+                <span class="date">58–51 a.C. | Formación Técnica</span>
+                <h3>Ingeniero Militar de Julio César</h3>
+                <p>Trabaja activamente como arquitecto e ingeniero militar bajo el mando de Julio César.</p>
+                <ul>
+                    <li>Participa en la construcción de <strong>máquinas de guerra, fortificaciones, campamentos y obras hidráulicas</strong>.</li>
+                    <li>Aquí adquiere el conocimiento práctico y técnico que posteriormente sistematizará en su teoría arquitectónica.</li>
+                </ul>
             </div>
         </div>
 
         <div class="container left">
             <div class="content">
-                <span class="date">30–20 a.C.</span>
-                <h3>Los Diez Libros de Arquitectura</h3>
-                <p>Bajo el emperador Augusto escribe <em>De Architectura</em>.</p>
+                <span class="date">30–20 a.C. | La Gran Obra</span>
+                <h3>Los Diez Libros de Arquitectura (De Architectura)</h3>
+                <p>Ya retirado del servicio militar, bajo el emperador Augusto y en un periodo de estabilidad política e impulso constructivo, escribe su tratado.</p>
                 <ul>
-                    <li>Primer tratado completo de la historia.</li>
-                    <li>Integra: Ingeniería, urbanismo, materiales y estética.</li>
-                    <li>Adapta saberes griegos (Hermógenes) al mundo romano.</li>
+                    <li><strong>Primer tratado arquitectónico completo</strong> de la historia que ha sobrevivido.</li>
+                    <li><strong>Visión integral:</strong> Integra arquitectura, ingeniería, urbanismo, materiales, máquinas y estética en un solo cuerpo de conocimiento.</li>
+                    <li><strong>Recuperación de saberes:</strong> Rescata saberes griegos (como los de Hermógenes de Alabanda, s. II a.C.) y los adapta pragmáticamente al mundo romano.</li>
                 </ul>
             </div>
         </div>
 
         <div class="container right">
             <div class="content">
-                <span class="date">Siglos III – XV d.C.</span>
-                <h3>Legado y Redescubrimiento</h3>
+                <span class="date">Siglos III d.C. – XV d.C. | Legado</span>
+                <h3>Transmisión y Redescubrimiento</h3>
                 <ul>
-                    <li><strong>S. III-IV:</strong> Citado como autoridad antigua.</li>
-                    <li><strong>S. IX:</strong> Copia manuscrita en Suiza salva la obra.</li>
-                    <li><strong>S. XV:</strong> Redescubrimiento en Florencia. Influye en Brunelleschi y Alberti.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="author-divider">
-            <span class="author-badge">Leon Battista Alberti</span>
-        </div>
-
-        <div class="container left">
-            <div class="content">
-                <span class="date">1404 - 1432</span>
-                <h3>Formación Humanista</h3>
-                <p>Nace en Génova (1404). Se gradúa en Derecho (1428) y se establece en Florencia (1432), entrando en contacto con el Renacimiento.</p>
-            </div>
-        </div>
-
-        <div class="container right">
-            <div class="content">
-                <span class="date">1435–1436</span>
-                <h3>Teoría de la Perspectiva</h3>
-                <p>Publica <em>De pictura</em>. Establece la perspectiva lineal y el concepto de "ventana abierta", vinculando geometría y visión.</p>
-            </div>
-        </div>
-
-        <div class="container left">
-            <div class="content">
-                <span class="date">1450–1452</span>
-                <h3>De Re Aedificatoria</h3>
-                <p>Primer tratado del Renacimiento moderno. Define la arquitectura como ciencia basada en proporción y armonía.</p>
-                <ul>
-                    <li><strong>Concinnitas:</strong> Armonía matemática perfecta.</li>
-                    <li><strong>Belleza:</strong> Objetiva y racional, no subjetiva.</li>
-                    <li><strong>Principios:</strong> Reinterpreta Firmitas, Utilitas y Venustas subordinados a la razón.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="container right">
-            <div class="content">
-                <span class="date">1446–1470</span>
-                <h3>Obras Maestras</h3>
-                <ul>
-                    <li><strong>Palacio Rucellai (1446):</strong> Uso racional de órdenes superpuestos.</li>
-                    <li><strong>Templo Malatestiano (1450):</strong> Reinterpretación del arco triunfal.</li>
-                    <li><strong>Santa María Novella (1456):</strong> Geometría pura (cuadrado y círculo).</li>
-                    <li><strong>San Andrés, Mantua (1470):</strong> Monumentalidad romana y nave única.</li>
+                    <li><strong>Reconocimiento póstumo (S. III-IV):</strong> Citado como máxima autoridad de la arquitectura antigua.</li>
+                    <li><strong>Antigüedad tardía (S. V):</strong> Sidonio Apolinar confirma la vigencia de su pensamiento.</li>
+                    <li><strong>Salvaguarda medieval (S. IX):</strong> Una copia manuscrita en un monasterio de Suiza evita la pérdida de la obra.</li>
+                    <li><strong>Redescubrimiento Renacentista (S. XV):</strong> Su tratado llega a intelectuales en Florencia, influyendo directamente en Brunelleschi y Alberti, consolidando una arquitectura basada en la proporción, simetría y razón.</li>
                 </ul>
             </div>
         </div>
 
         <div class="author-divider">
-            <span class="author-badge">Andrea Palladio</span>
+            <span class="author-badge">Leon Battista Alberti (1404–1472)</span>
         </div>
 
         <div class="container left">
             <div class="content">
-                <span class="date">1508 - 1538</span>
-                <h3>Inicios y Formación</h3>
-                <p>Nace en Padua. Bajo la tutela del noble Gian Giorgio Trissino estudia la arquitectura clásica y recibe el nombre de "Palladio" (por Palas Atenea).</p>
+                <span class="date">1404 – 1432 | Formación del Humanista</span>
+                <h3>Inicios y Contacto con el Renacimiento</h3>
+                <ul>
+                    <li><strong>1404:</strong> Nace en Génova, Italia.</li>
+                    <li><strong>1428:</strong> Se gradúa en Derecho Canónico en Bolonia.</li>
+                    <li><strong>1432:</strong> Se establece en Florencia, entrando en contacto directo con el humanismo y la naciente arquitectura renacentista, lo que redirige sus intereses hacia el arte y la teoría.</li>
+                </ul>
             </div>
         </div>
 
         <div class="container right">
             <div class="content">
-                <span class="date">1540s - 1549</span>
-                <h3>Villas y Basílica de Vicenza</h3>
-                <p>Aplica principios de templos a edificios agrícolas. En 1549 realiza su primera gran obra civil en Vicenza con la logia de dos niveles.</p>
+                <span class="date">1435 – 1452 | Bases Teóricas</span>
+                <h3>Tratados Fundamentales: Perspectiva y Arquitectura</h3>
+                <ul>
+                    <li><strong>De pictura (1435/36):</strong> Establece las bases matemáticas de la perspectiva lineal. Introduce el concepto del cuadro como una "ventana abierta", vinculando geometría, visión y representación espacial.</li>
+                    <li><strong>De statua (1443):</strong> Aplica principios matemáticos a la proporción del cuerpo humano, reforzando el diseño basado en medidas racionales.</li>
+                    <li><strong>De re aedificatoria (1452):</strong> Primer tratado arquitectónico del Renacimiento moderno. Define la arquitectura como una ciencia intelectual, no solo manual.</li>
+                </ul>
             </div>
         </div>
 
         <div class="container left">
             <div class="content">
-                <span class="date">1566–1570</span>
+                <span class="date">Conceptos Clave | Pensamiento Albertiano</span>
+                <h3>Concinnitas, Belleza y la Reinterpretación Clásica</h3>
+                <ul>
+                    <li><strong>Arquitectura como arte intelectual:</strong> El arquitecto concibe y diseña mediante la razón antes de ejecutar.</li>
+                    <li><strong>Concinnitas (Armonía Perfecta):</strong> Propone que la belleza es objetiva y resulta de la armonía matemática exacta entre todas las partes del edificio. Rechaza la belleza como algo subjetivo.</li>
+                    <li><strong>Reinterpretación de Vitruvio:</strong> Retoma la tríada *Firmitas, Utilitas y Venustas*, adaptándola al humanismo y otorgando a la *venustas* (belleza armónica) un papel central, siempre subordinado a la razón.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <span class="date">1450 – 1470 | Teoría Urbana y Obras</span>
+                <h3>La Ciudad y los Edificios Paradigmáticos</h3>
+                <p>Plantea la arquitectura como instrumento de orden urbano y político (fachadas armónicas, plazas regulares). Sus obras reflejan su teoría:</p>
+                <ul>
+                    <li><strong>Palacio Rucellai (Florencia, 1446-51):</strong> Uso racional de órdenes clásicos superpuestos en fachada.</li>
+                    <li><strong>Templo Malatestiano (Rímini, 1450):</strong> Reinterpretación del arco triunfal romano para una iglesia cristiana.</li>
+                    <li><strong>Fachada Santa María Novella (Florencia, 1456-70):</strong> Integración de lo gótico existente mediante geometría pura (cuadrado y círculo) y proporción clásica.</li>
+                    <li><strong>Basílica de San Andrés (Mantua, 1470):</strong> Monumentalidad romana, nave única con gran arco central y fuerte carga urbana.</li>
+                    <li><strong>Iglesia de San Sebastiano (Mantua, 1460):</strong> Planta centralizada, simetría estricta y geometría pura sin ornamento excesivo.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="author-divider">
+            <span class="author-badge">Andrea Palladio (1508–1580)</span>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <span class="date">1508 – 1538 | Formación</span>
+                <h3>El Nacimiento de "Palladio"</h3>
+                <ul>
+                    <li><strong>1508:</strong> Nace en Padua, República de Venecia.</li>
+                    <li><strong>1537–38:</strong> Comienza su carrera bajo la tutela del noble humanista Gian Giorgio Trissino.</li>
+                    <li>Trissino lo introduce al estudio de la arquitectura clásica y tratados (como Serlio) y le da el nombre de "Palladio", inspirado en Palas Atenea, diosa de la sabiduría.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container right">
+            <div class="content">
+                <span class="date">1540s – 1550 | Innovación Tipológica</span>
+                <h3>Las Villas y la Basílica de Vicenza</h3>
+                <ul>
+                    <li><strong>Primeras villas (Década 1540):</strong> Diseña villas rurales para la aristocracia veneciana, aplicando a edificios agrícolas principios de diseño (como frontones) antes reservados solo a templos y palacios.</li>
+                    <li><strong>Basílica de Vicenza (1549):</strong> Su primera gran obra civil. Una intervención magistral sobre un edificio medieval existente mediante una "cáscara" de logias clásicas de dos niveles (el famoso motivo palladiano).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container left">
+            <div class="content">
+                <span class="date">1560 – 1570 | Plenitud Teórica y Práctica</span>
                 <h3>Villa Rotonda y Los Cuatro Libros</h3>
-                <p>Diseña la Villa Rotonda (simetría total). En 1570 publica <em>Los cuatro libros de la arquitectura</em>, uniendo teoría y práctica mediante dibujos.</p>
+                <ul>
+                    <li><strong>Etapa Veneciana (1560-77):</strong> Aplica el lenguaje clásico a la arquitectura religiosa en Venecia.</li>
+                    <li><strong>Villa Rotonda (1566-70):</strong> Obra maestra del clasicismo. Planta centralizada, simetría total en sus cuatro fachadas y referencia directa al Panteón romano.</li>
+                    <li><strong>Los cuatro libros de la arquitectura (Pub. 1570):</strong> Difunde reglas de proporción, órdenes y tipologías. Es crucial porque une la teoría con la práctica mediante dibujos claros y ejemplos construidos, haciéndola replicable.</li>
+                </ul>
             </div>
         </div>
 
         <div class="container right">
             <div class="content">
-                <span class="date">1579–1580</span>
-                <h3>Teatro Olímpico y Legado</h3>
-                <p>Inicia el Teatro Olímpico basado en Vitruvio. Fallece en 1580, consolidando el "Palladianismo" que influiría siglos en Europa y América.</p>
+                <span class="date">1579 – 1580 | Obra Final y Legado</span>
+                <h3>Teatro Olímpico y el Palladianismo</h3>
+                <ul>
+                    <li><strong>Teatro Olímpico, Vicenza (1579):</strong> Inspirado directamente en los teatros romanos antiguos descritos por Vitruvio.</li>
+                    <li><strong>Muerte (1580):</strong> Fallece en Vicenza dejando el teatro inconcluso.</li>
+                    <li><strong>Legado:</strong> Su enfoque sistemático y sus libros consolidaron el "Palladianismo", un estilo que influyó en la arquitectura de Europa (especialmente Inglaterra) y América durante siglos.</li>
+                </ul>
             </div>
         </div>
 
@@ -404,38 +453,44 @@
 
     <section class="analysis-section">
         <div class="analysis-container">
-            <h2 style="text-align: center; margin-bottom: 2rem;">Análisis Comparativo</h2>
+            <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">ANÁLISIS COMPARATIVO</h2>
             
             <div class="analysis-card">
-                <h3>1. Similitudes y Diferencias</h3>
-                <p><strong>Similitudes:</strong> Los tres comparten una visión racional donde la arquitectura es una disciplina intelectual basada en principios universales, proporción y geometría. Vitruvio formula la tradición, Alberti la intelectualiza desde el humanismo y Palladio la sistematiza para la práctica.</p>
+                <h3>1. Similitudes y diferencias entre sus conceptos arquitectónicos</h3>
+                <p><strong>Similitudes:</strong> Los tres comparten una visión racional y clásica de la arquitectura, heredada del mundo grecorromano. Coinciden en que la arquitectura se basa en principios universales (no en el gusto personal), el uso estricto de la proporción, la simetría y la geometría, y consideran la arquitectura como una disciplina intelectual. Además, los tres entienden que la arquitectura debe servir a la sociedad (técnica en Vitruvio, urbana/política en Alberti, habitacional/territorial en Palladio).</p>
                 <br>
-                <p><strong>Diferencias:</strong> Mientras Vitruvio sienta las bases técnicas de la antigüedad, Alberti eleva la arquitectura a ciencia teórica y política, y Palladio logra crear un método replicable y habitacional.</p>
+                <p><strong>Diferencias:</strong> La principal diferencia radica en su rol histórico: <strong>Vitruvio</strong> establece y compila las bases del saber antiguo; <strong>Alberti</strong> teoriza esas bases y las eleva intelectualmente desde el humanismo renacentista; y <strong>Palladio</strong> las sistematiza, materializa y difunde a través de un método proyectual claro y replicable.</p>
             </div>
 
             <div class="analysis-card">
-                <h3>2. Vigencia en la Actualidad</h3>
-                <p><strong>Firmitas, Utilitas, Venustas:</strong> Siguen siendo la tríada esencial: estabilidad, función y estética.</p>
-                <p><strong>Proporción y Ciudad:</strong> La geometría sigue siendo herramienta de orden, y la visión de Alberti sobre el edificio como parte del entorno urbano define el diseño contemporáneo.</p>
-                <p><strong>Teoría + Práctica:</strong> Gracias a Palladio, buscamos una arquitectura enseñable y modular.</p>
+                <h3>2. ¿Qué principios siguen vigentes hoy en día y por qué?</h3>
+                <ul>
+                    <li><strong>Firmitas, Utilitas y Venustas:</strong> Siguen siendo la base fundamental. Toda arquitectura actual debe buscar la estabilidad estructural, responder adecuadamente a su función y usuario, y ofrecer calidad espacial y estética.</li>
+                    <li><strong>Proporción y geometría:</strong> Siguen vigentes como herramientas racionales para crear espacios legibles, equilibrados y ordenados, desde el diseño minimalista hasta el paramétrico.</li>
+                    <li><strong>Arquitectura como disciplina intelectual (Alberti):</strong> Es la base de la práctica profesional contemporánea, donde el proyecto se basa en análisis, concepto y diseño previo a la construcción.</li>
+                    <li><strong>Relación arquitectura–ciudad:</strong> El entendimiento del edificio como pieza clave del entorno urbano y social es un concepto albertiano totalmente vigente.</li>
+                    <li><strong>Teoría + práctica (Palladio):</strong> La búsqueda de sistemas arquitectónicos comprensibles, modulares y enseñables sigue siendo relevante en la actualidad.</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section class="biblio-section">
-        <h2 style="border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; margin-bottom: 20px;">Referencias Bibliográficas</h2>
+        <h2 style="border-bottom: 2px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 30px; text-align: center;">REFERENCIAS BIBLIOGRÁFICAS</h2>
         
-        <div class="biblio-item">Alberti, L. B. (1988). <em>De re aedificatoria</em> (J. Rykwert, N. Leach & R. Tavernor, Trads.). MIT Press.</div>
-        <div class="biblio-item">Alberti, L. B. (1972). <em>On painting and on sculpture: The Latin texts of De pictura and De statua</em>. Phaidon Press.</div>
+        <div class="biblio-item">Alberti, L. B. (1988). <em>De re aedificatoria</em> (J. Rykwert, N. Leach & R. Tavernor, Trads.). MIT Press. (Obra original escrita ca. 1452 y publicada póstumamente en 1485).</div>
+        <div class="biblio-item">Alberti, L. B. (1972). <em>On painting and on sculpture: The Latin texts of De pictura and De statua</em> (C. Grayson, Trad.). Phaidon Press. (Obras originales publicadas en 1435 y 1443).</div>
         <div class="biblio-item">Benevolo, L. (1994). <em>Historia de la arquitectura del Renacimiento</em>. Gustavo Gili.</div>
-        <div class="biblio-item">Cartwright, M., & Cartwright, M. (2023). <em>Vitruvio</em>. Enciclopedia de la Historia del Mundo.</div>
+        <div class="biblio-item">Cartwright, M., & Cartwright, M. (2023). <em>Vitruvio</em>. Enciclopedia de la Historia del Mundo. https://www.worldhistory.org/trans/es/1-12057/vitruvio/</div>
         <div class="biblio-item">Kruft, H.-W. (1994). <em>Historia de la teoría de la arquitectura (Vol. 1)</em>. Alianza Editorial.</div>
+        <div class="biblio-item">Redacción - BBC News Mundo. (2022, 30 julio). <em>Quién fue Vitruvio, el genial arquitecto militar que inspiró el famoso dibujo de Leonardo da Vinci</em>. Yahoo News. https://es-us.noticias.yahoo.com/vitruvio-genial-arquitecto-militar-inspir%C3%B3-095927862.html</div>
         <div class="biblio-item">Wittkower, R. (1998). <em>La arquitectura en la edad del humanismo</em>. Alianza Editorial.</div>
-        <div class="biblio-item">Redacción - BBC News Mundo. (2022). <em>Quién fue Vitruvio</em>. Yahoo News.</div>
+        <div class="biblio-item">https://www.urbipedia.org/hoja/Andrea_Palladio</div>
+        <div class="biblio-item">https://www.descubrirelarte.es/2018/04/08/el-legado-de-palladio-inmortalizado-por-el-septimo-arte.html</div>
     </section>
 
     <footer>
-        <p>FARQ UANL &copy; 2026</p>
+        <p>FACULTAD DE ARQUITECTURA UANL &copy; 2026 | Teorías de la Arquitectura</p>
     </footer>
 
 </body>
